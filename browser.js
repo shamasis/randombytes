@@ -1,16 +1,5 @@
 'use strict'
-
-function oldBrowser () {
-  throw new Error('secure random number generation not supported by this browser\nuse chrome, FireFox or Internet Explorer 11')
-}
-
 var crypto = global.crypto || global.msCrypto
-
-if (crypto && crypto.getRandomValues) {
-  module.exports = randomBytes
-} else {
-  module.exports = oldBrowser
-}
 
 function randomBytes (size, cb) {
   // phantomjs needs to throw
@@ -33,4 +22,18 @@ function randomBytes (size, cb) {
   }
 
   return bytes
+}
+
+module.exports = function (size, cb) {
+  if (crypto && crypto.getRandomValues) {
+    return randomBytes(size, cb)
+  } else if (crypto && crypto.randomBytes) {
+    return crypto.randomBytes(size, cb)
+  }
+
+  throw new Error('secure random number generation not supported by this browser\nuse chrome, FireFox or Internet Explorer 11')
+}
+
+module.exports._compat = function (_crypto) {
+  _crypto && (crypto = _crypto)
 }

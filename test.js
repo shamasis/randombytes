@@ -10,7 +10,7 @@ test('sync', function (t) {
 })
 
 test('async', function (t) {
-  t.plan(4)
+  t.plan(5)
 
   randomBytes(0, function (err, resp) {
     if (err) throw err
@@ -34,6 +34,18 @@ test('async', function (t) {
     if (err) throw err
 
     t.equals(resp.length, 300, 'len: ' + 300)
+  })
+
+  randomBytes._compat({
+    randomBytes: function (size, cb) {
+      cb(null, new Buffer([1, 2, 3, 4]))
+    }
+  })
+
+  randomBytes(10, function (err, resp) {
+    if (err) throw err
+
+    t.equals(resp.length, 4, 'len: forced 4 (compat)')
   })
 })
 

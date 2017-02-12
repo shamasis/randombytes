@@ -1,7 +1,8 @@
 {
-  "name": "randombytes",
-  "version": "2.0.3",
-  "description": "random bytes from browserify stand alone",
+  "name": "randombytes-compat",
+  "version": "1.0.0",
+  "forkedVersion": "2.0.3",
+  "description": "random bytes from browserify stand alone (with compatibility support to set own crypto)",
   "main": "index.js",
   "scripts": {
     "test": "standard && node test.js | tspec",
@@ -10,18 +11,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:crypto-browserify/randombytes.git"
+    "url": "git@github.com:shamasis/randombytes.git"
   },
   "keywords": [
     "crypto",
-    "random"
+    "random",
+    "vm"
   ],
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/crypto-browserify/randombytes/issues"
+    "url": "https://github.com/shamasis/randombytes/issues"
   },
-  "homepage": "https://github.com/crypto-browserify/randombytes",
+  "homepage": "https://github.com/shamasis/randombytes",
   "browser": "browser.js",
   "devDependencies": {
     "phantomjs": "^1.9.9",

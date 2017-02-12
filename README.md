@@ -12,3 +12,18 @@ randomBytes(16, function (err, resp) {
   // resp is 16 random bytes
 });
 ```
+
+## Bring your own crypto
+
+```js
+var randomBytes = require('randombytes');
+
+// set your own crypto supporting `randomBytes` function
+randomBytes._compat({
+  randomBytes: function (size, cb) {
+    // your own implementation of randomBytes here
+  }
+});
+
+randomBytes(16); //get 16 random bytes
+```
